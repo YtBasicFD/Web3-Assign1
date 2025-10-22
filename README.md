@@ -9,23 +9,23 @@ Built with
 
 API Endpoints:
 
-/api/circuits
-/api/circuits/ref
-/api/circuits/season/year
-/api/constructors
-/api/constructors/ref
-/api/drivers
-/api/drivers/ref
-/api/drivers/search/substring
-/api/drivers/race/raceId
-/api/races/raceId
-/api/races/season/year
-/api/races/season/year/round
-/api/races/circuits/ref
-/api/races/circuits/ref/season/start/end
-/api/results/raceId
-/api/results/driver/ref 
-/api/results/drivers/ref/seasons/start/end
-/api/qualifying/raceId
-/api/standings/drivers/raceId
-/api/standings/constructors/raceId
+- /api/circuits
+- /api/circuits/ref
+- /api/circuits/season/year
+- /api/constructors
+- /api/constructors/ref
+- /api/drivers
+- /api/drivers/ref
+- /api/drivers/search/substring
+- /api/drivers/race/raceId
+- /api/races/raceId
+- /api/races/season/year
+- /api/races/season/year/round
+- /api/races/circuits/ref
+- /api/races/circuits/ref/season/start/end
+- /api/results/raceId
+- /api/results/driver/ref 
+- /api/results/drivers/ref/seasons/start/end
+- /api/qualifying/raceId
+- /api/standings/drivers/raceId
+- /api/standings/constructors/raceId
