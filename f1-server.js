@@ -39,3 +39,23 @@ app.get("/api/circuits/season/:year", async (req, res) => {
 
   res.json(data);
 });
+
+//constructors api
+app.get("/api/constructors", async (req, res) => {
+  const { data, error } = await supabase
+  .from("constructors")
+  .select("*");
+
+  res.json(data);
+});
+
+app.get("/api/constructors/:ref", async (req, res) => {
+  const { ref } = req.params;
+  const { data, error } = await supabase
+  .from("constructors")
+  .select("*")
+  .eq("constructorRef", ref)
+  .single();
+
+  res.json(data);
+});
