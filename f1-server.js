@@ -15,6 +15,10 @@ app.get("/api/circuits", async (req, res) => {
   .from("circuits")
   .select("*");
 
+  if (error) {
+    res.json({ error: 'Data not found' });
+  };
+
   res.json(data);
 });
 
@@ -37,6 +41,10 @@ app.get("/api/circuits/season/:year", async (req, res) => {
     .eq("year", year)
     .order("round", { ascending: true });
 
+  if (error) {
+    res.json({ error: 'Data not found' });
+  };
+
   res.json(data);
 });
 
@@ -45,6 +53,10 @@ app.get("/api/constructors", async (req, res) => {
   const { data, error } = await supabase
   .from("constructors")
   .select("*");
+
+  if (error) {
+    res.json({ error: 'Data not found' });
+  };
 
   res.json(data);
 });
@@ -57,6 +69,10 @@ app.get("/api/constructors/:ref", async (req, res) => {
   .eq("constructorRef", ref)
   .single();
 
+  if (error) {
+    res.json({ error: 'Data not found' });
+  };
+
   res.json(data);
 });
 
@@ -65,6 +81,10 @@ app.get("/api/drivers", async (req, res) => {
   const { data, error } = await supabase
   .from("drivers")
   .select("*");
+
+  if (error) {
+    res.json({ error: 'Data not found' });
+  };
 
   res.json(data);
 });
@@ -77,6 +97,10 @@ app.get("/api/drivers/:ref", async (req, res) => {
   .eq("driverRef", ref)
   .single();
 
+  if (error) {
+    res.json({ error: 'Data not found' });
+  };
+
   res.json(data);
 });
 
@@ -87,6 +111,10 @@ app.get("/api/drivers/search/:substring", async (req, res) => {
     .select("*")
     .ilike("surname", `${substring}%`);
 
+  if (error) {
+    res.json({ error: 'Data not found' });
+  };
+
   res.json(data);
 });
 
@@ -96,6 +124,10 @@ app.get("/api/drivers/race/:raceId", async (req, res) => {
     .from("results")
     .select("drivers!inner(*)")
     .eq("raceId", raceId);
+
+  if (error) {
+    res.json({ error: 'Data not found' });
+  };
 
   res.json(data);
 });
@@ -109,6 +141,10 @@ app.get("/api/races/:raceId", async (req, res) => {
     .eq("raceId", raceId)
     .single();
 
+  if (error) {
+    res.json({ error: 'Data not found' });
+  };
+
   res.json(data);
 });
 
@@ -119,6 +155,10 @@ app.get("/api/races/season/:year", async (req, res) => {
     .select("*")
     .eq("year", year)
     .order("round", { ascending: true });
+
+  if (error) {
+    res.json({ error: 'Data not found' });
+  };
 
   res.json(data);
 });
@@ -132,6 +172,10 @@ app.get("/api/races/season/:year/:round", async (req, res) => {
     .eq("round", round)
     .single();
 
+  if (error) {
+    res.json({ error: 'Data not found' });
+  };
+
   res.json(data);
 });
 
@@ -142,6 +186,10 @@ app.get("/api/races/circuits/:ref", async (req, res) => {
     .select("*, circuits!inner(circuitRef)")
     .eq("circuits.circuitRef", ref)
     .order("year", { ascending: true });
+
+  if (error) {
+    res.json({ error: 'Data not found' });
+  };
 
   res.json(data);
 });
@@ -156,10 +204,16 @@ app.get("/api/races/circuits/:ref/season/:start/:end", async (req, res) => {
     .lte("year", end)
     .order("year", { ascending: true });
 
+  if (error) {
+    res.json({ error: 'Data not found' });
+  } else if (start > end) {
+    res.json({ error: 'Data not found' });
+  };
+
   res.json(data);
 });
 
-//results
+//results api
 app.get("/api/races/:raceId", async (req, res) => {
   const { raceId } = req.params;
   const { data, error } = await supabase
@@ -167,6 +221,10 @@ app.get("/api/races/:raceId", async (req, res) => {
     .select("*, circuits!inner(name, location, country)")
     .eq("raceId", raceId)
     .single();
+
+  if (error) {
+    res.json({ error: 'Data not found' });
+  };
 
   res.json(data);
 });
@@ -178,6 +236,10 @@ app.get("/api/races/season/:year", async (req, res) => {
     .select("*")
     .eq("year", year)
     .order("round", { ascending: true });
+
+  if (error) {
+    res.json({ error: 'Data not found' });
+  };
 
   res.json(data);
 });
@@ -191,10 +253,14 @@ app.get("/api/races/season/:year/:round", async (req, res) => {
     .eq("round", round)
     .single();
 
+  if (error) {
+    res.json({ error: 'Data not found' });
+  };
+
   res.json(data);
 });
 
-//qualifying
+//qualifying api
 app.get("/api/qualifying/:raceId", async (req, res) => {
   const { raceId } = req.params;
   const { data, error } = await supabase
@@ -202,6 +268,10 @@ app.get("/api/qualifying/:raceId", async (req, res) => {
     .select(`position, q1, q2, q3, drivers!inner(driverRef, forename, surname), constructors!inner(constructorRef, name, nationality)`)
     .eq("raceId", raceId)
     .order("position", { ascending: true });
+
+  if (error) {
+    res.json({ error: 'Data not found' });
+  };
 
   res.json(data);
 });
@@ -215,6 +285,10 @@ app.get("/api/standings/drivers/:raceId", async (req, res) => {
     .eq("raceId", raceId)
     .order("position", { ascending: true });
 
+  if (error) {
+    res.json({ error: 'Data not found' });
+  };
+
   res.json(data);
 });
 
@@ -225,6 +299,10 @@ app.get("/api/standings/constructors/:raceId", async (req, res) => {
     .select(`position, points, wins, constructors!inner(constructorRef, name, nationality)`)
     .eq("raceId", raceId)
     .order("position", { ascending: true });
+
+  if (error) {
+    res.json({ error: 'Data not found' });
+  };
 
   res.json(data);
 });
