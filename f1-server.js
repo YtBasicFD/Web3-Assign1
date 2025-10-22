@@ -306,3 +306,5 @@ app.get("/api/standings/constructors/:raceId", async (req, res) => {
 
   res.json(data);
 });
+
+app.listen(10000);
