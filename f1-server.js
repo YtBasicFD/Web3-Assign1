@@ -99,3 +99,62 @@ app.get("/api/drivers/race/:raceId", async (req, res) => {
 
   res.json(data);
 });
+
+//races api
+app.get("/api/races/:raceId", async (req, res) => {
+  const { raceId } = req.params;
+  const { data, error } = await supabase
+    .from("races")
+    .select("*, circuits!inner(name, location, country)")
+    .eq("raceId", raceId)
+    .single();
+
+  res.json(data);
+});
+
+app.get("/api/races/season/:year", async (req, res) => {
+  const { year } = req.params;
+  const { data, error } = await supabase
+    .from("races")
+    .select("*")
+    .eq("year", year)
+    .order("round", { ascending: true });
+
+  res.json(data);
+});
+
+app.get("/api/races/season/:year/:round", async (req, res) => {
+  const { year, round } = req.params;
+  const { data, error } = await supabase
+    .from("races")
+    .select("*")
+    .eq("year", year)
+    .eq("round", round)
+    .single();
+
+  res.json(data);
+});
+
+app.get("/api/races/circuits/:ref", async (req, res) => {
+  const { ref } = req.params;
+  const { data, error } = await supabase
+    .from("races")
+    .select("*, circuits!inner(circuitRef)")
+    .eq("circuits.circuitRef", ref)
+    .order("year", { ascending: true });
+
+  res.json(data);
+});
+
+app.get("/api/races/circuits/:ref/season/:start/:end", async (req, res) => {
+  const { ref, start, end } = req.params;
+  const { data, error } = await supabase
+    .from("races")
+    .select("*, circuits!inner(circuitRef)")
+    .eq("circuits.circuitRef", ref)
+    .gte("year", start)
+    .lte("year", end)
+    .order("year", { ascending: true });
+
+  res.json(data);
+});
