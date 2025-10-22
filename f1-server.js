@@ -59,3 +59,33 @@ app.get("/api/constructors/:ref", async (req, res) => {
 
   res.json(data);
 });
+
+//drivers api
+app.get("/api/drivers", async (req, res) => {
+  const { data, error } = await supabase
+  .from("drivers")
+  .select("*");
+
+  res.json(data);
+});
+
+app.get("/api/drivers/:ref", async (req, res) => {
+  const { ref } = req.params;
+  const { data, error } = await supabase
+  .from("drivers")
+  .select("*")
+  .eq("driverRef", ref)
+  .single();
+
+  res.json(data);
+});
+
+app.get("/api/drivers/search/:substring", async (req, res) => {
+  const { substring } = req.params;
+  const { data, error } = await supabase
+    .from("drivers")
+    .select("*")
+    .ilike("surname", `${substring}%`);
+
+  res.json(data);
+});
