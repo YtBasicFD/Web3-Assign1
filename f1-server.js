@@ -158,3 +158,73 @@ app.get("/api/races/circuits/:ref/season/:start/:end", async (req, res) => {
 
   res.json(data);
 });
+
+//results
+app.get("/api/races/:raceId", async (req, res) => {
+  const { raceId } = req.params;
+  const { data, error } = await supabase
+    .from("races")
+    .select("*, circuits!inner(name, location, country)")
+    .eq("raceId", raceId)
+    .single();
+
+  res.json(data);
+});
+
+app.get("/api/races/season/:year", async (req, res) => {
+  const { year } = req.params;
+  const { data, error } = await supabase
+    .from("races")
+    .select("*")
+    .eq("year", year)
+    .order("round", { ascending: true });
+
+  res.json(data);
+});
+
+app.get("/api/races/season/:year/:round", async (req, res) => {
+  const { year, round } = req.params;
+  const { data, error } = await supabase
+    .from("races")
+    .select("*")
+    .eq("year", year)
+    .eq("round", round)
+    .single();
+
+  res.json(data);
+});
+
+//qualifying
+app.get("/api/qualifying/:raceId", async (req, res) => {
+  const { raceId } = req.params;
+  const { data, error } = await supabase
+    .from("qualifying")
+    .select(`position, q1, q2, q3, drivers!inner(driverRef, forename, surname), constructors!inner(constructorRef, name, nationality)`)
+    .eq("raceId", raceId)
+    .order("position", { ascending: true });
+
+  res.json(data);
+});
+
+//standings api
+app.get("/api/standings/drivers/:raceId", async (req, res) => {
+  const { raceId } = req.params;
+  const { data, error } = await supabase
+    .from("drivers_standings")
+    .select(`position, points, wins, drivers!inner(driverRef, code, forename, surname)`)
+    .eq("raceId", raceId)
+    .order("position", { ascending: true });
+
+  res.json(data);
+});
+
+app.get("/api/standings/constructors/:raceId", async (req, res) => {
+  const { raceId } = req.params;
+  const { data, error } = await supabase
+    .from("constructor_standings")
+    .select(`position, points, wins, constructors!inner(constructorRef, name, nationality)`)
+    .eq("raceId", raceId)
+    .order("position", { ascending: true });
+
+  res.json(data);
+});
