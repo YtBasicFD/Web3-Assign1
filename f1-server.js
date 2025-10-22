@@ -89,3 +89,13 @@ app.get("/api/drivers/search/:substring", async (req, res) => {
 
   res.json(data);
 });
+
+app.get("/api/drivers/race/:raceId", async (req, res) => {
+  const { raceId } = req.params;
+  const { data, error } = await supabase
+    .from("results")
+    .select("drivers!inner(*)")
+    .eq("raceId", raceId);
+
+  res.json(data);
+});
