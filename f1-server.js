@@ -16,7 +16,7 @@ app.get("/api/circuits", async (req, res) => {
   .select("*");
 
   if (error) {
-    res.json({ error: 'Data not found' });
+    return res.json({ error: 'Data not found' });
   };
 
   res.json(data);
@@ -30,6 +30,10 @@ app.get("/api/circuits/:ref", async (req, res) => {
   .eq("circuitRef", ref)
   .single();
 
+  if (error) {
+    return res.json({ error: 'Data not found' });
+  };
+
   res.json(data);
 });
 
@@ -42,7 +46,7 @@ app.get("/api/circuits/season/:year", async (req, res) => {
     .order("round", { ascending: true });
 
   if (error) {
-    res.json({ error: 'Data not found' });
+    return res.json({ error: 'Data not found' });
   };
 
   res.json(data);
@@ -55,7 +59,7 @@ app.get("/api/constructors", async (req, res) => {
   .select("*");
 
   if (error) {
-    res.json({ error: 'Data not found' });
+    return res.json({ error: 'Data not found' });
   };
 
   res.json(data);
@@ -70,7 +74,7 @@ app.get("/api/constructors/:ref", async (req, res) => {
   .single();
 
   if (error) {
-    res.json({ error: 'Data not found' });
+    return res.json({ error: 'Data not found' });
   };
 
   res.json(data);
@@ -83,7 +87,7 @@ app.get("/api/drivers", async (req, res) => {
   .select("*");
 
   if (error) {
-    res.json({ error: 'Data not found' });
+    return res.json({ error: 'Data not found' });
   };
 
   res.json(data);
@@ -98,7 +102,7 @@ app.get("/api/drivers/:ref", async (req, res) => {
   .single();
 
   if (error) {
-    res.json({ error: 'Data not found' });
+    return res.json({ error: 'Data not found' });
   };
 
   res.json(data);
@@ -112,7 +116,7 @@ app.get("/api/drivers/search/:substring", async (req, res) => {
     .ilike("surname", `${substring}%`);
 
   if (error) {
-    res.json({ error: 'Data not found' });
+    return res.json({ error: 'Data not found' });
   };
 
   res.json(data);
@@ -126,7 +130,7 @@ app.get("/api/drivers/race/:raceId", async (req, res) => {
     .eq("raceId", raceId);
 
   if (error) {
-    res.json({ error: 'Data not found' });
+    return res.json({ error: 'Data not found' });
   };
 
   res.json(data);
@@ -142,7 +146,7 @@ app.get("/api/races/:raceId", async (req, res) => {
     .single();
 
   if (error) {
-    res.json({ error: 'Data not found' });
+    return res.json({ error: 'Data not found' });
   };
 
   res.json(data);
@@ -157,7 +161,7 @@ app.get("/api/races/season/:year", async (req, res) => {
     .order("round", { ascending: true });
 
   if (error) {
-    res.json({ error: 'Data not found' });
+    return res.json({ error: 'Data not found' });
   };
 
   res.json(data);
@@ -173,7 +177,7 @@ app.get("/api/races/season/:year/:round", async (req, res) => {
     .single();
 
   if (error) {
-    res.json({ error: 'Data not found' });
+    return res.json({ error: 'Data not found' });
   };
 
   res.json(data);
@@ -188,7 +192,7 @@ app.get("/api/races/circuits/:ref", async (req, res) => {
     .order("year", { ascending: true });
 
   if (error) {
-    res.json({ error: 'Data not found' });
+    return res.json({ error: 'Data not found' });
   };
 
   res.json(data);
@@ -205,9 +209,9 @@ app.get("/api/races/circuits/:ref/season/:start/:end", async (req, res) => {
     .order("year", { ascending: true });
 
   if (error) {
-    res.json({ error: 'Data not found' });
+    return res.json({ error: 'Data not found' });
   } else if (start > end) {
-    res.json({ error: 'Data not found' });
+    return res.json({ error: 'Data not found' });
   };
 
   res.json(data);
@@ -225,9 +229,11 @@ app.get("/api/results/:raceId", async (req, res) => {
     `)
     .eq("raceId", raceId)
     .order("grid", { ascending: true });
+
   if (error) {
-    res.json({ error: 'Data not found' });
+    return res.json({ error: 'Data not found' });
   };
+
   res.json(data);
 });
 
@@ -239,7 +245,7 @@ app.get("/api/results/drivers/:ref", async (req, res) => {
     .eq("drivers.driverRef", ref);
 
   if (error) {
-    res.json({ error: 'Data not found' });
+    return res.json({ error: 'Data not found' });
   };
 
   res.json(data);
@@ -254,11 +260,13 @@ app.get("/api/results/drivers/:ref/seasons/:start/:end", async (req, res) => {
     .gte("races.year", start)
     .lte("races.year", end);
 
-    if (error) {
-    res.json({ error: 'Data not found' });
+  if (error) {
+    return res.json({ error: 'Data not found' });
   } else if (start > end) {
-    res.json({ error: 'Data not found' });
+    return res.json({ error: 'Data not found' });
   };
+
+  res.json(data);
 });
 
 //qualifying api
@@ -271,7 +279,7 @@ app.get("/api/qualifying/:raceId", async (req, res) => {
     .order("position", { ascending: true });
 
   if (error) {
-    res.json({ error: 'Data not found' });
+    return res.json({ error: 'Data not found' });
   };
 
   res.json(data);
@@ -287,7 +295,7 @@ app.get("/api/standings/drivers/:raceId", async (req, res) => {
     .order("position", { ascending: true });
 
   if (error) {
-    res.json({ error: 'Data not found' });
+    return res.json({ error: 'Data not found' });
   };
 
   res.json(data);
@@ -302,7 +310,7 @@ app.get("/api/standings/constructors/:raceId", async (req, res) => {
     .order("position", { ascending: true });
 
   if (error) {
-    res.json({ error: 'Data not found' });
+    return res.json({ error: 'Data not found' });
   };
 
   res.json(data);
