@@ -1,44 +1,15 @@
-# COMP-4513 Assignment 1, Formula 1 Data API
+# Web3-Assign1
 
-## Overview
-This assignment creates an F1 data API for querying. Some of the data includes: circuits, constructors, drivers, races, and results, which are returned in JSON format.
+## Description
+This repository contains code for F1 API. The assignment was to create multiple API endpoints for specific searches ranging from driver information to specific standings.
 
-### Basic Link:
-https://comp-4513-f1-api-assignment-1.onrender.com/api/circuits
-
-### Example:
-
-#### Request: 
-
-[/api/drivers/leclerc](https://comp-4513-f1-api-assignment-1.onrender.com/api/drivers/leclerc)
-Exact URL:
-https://comp-4513-f1-api-assignment-1.onrender.com/api/drivers/leclerc 
-
-#### Response:
-
-```json
-[
-  {
-    "driverId":844,
-    "driverRef":"leclerc",
-    "number":16,
-    "code":"LEC",
-    "forename":"Charles",
-    "surname":"Leclerc",
-    "dob":"1997-10-16",
-    "nationality":"Monegasque",
-    "url":"http://en.wikipedia.org/wiki/Charles_Leclerc"
-  }
-]
-```
-
-## Built with:
-NodeJS, Express, Render - https://comp-4513-f1-api-assignment-1.onrender.com
+## Built with
+- Node.js + Express
+- Supabase
+- Render.com
 
 ## API Endpoints:
 
-| API Route (after https://comp-4513-f1-api-assignment-1.onrender.com) | Description |
-|---|---|
 | [/api/circuits] | Returns all the circuits. |
 | [/api/circuits/ref] | Returns a specified circuit. |
 | [/api/circuits/season/year] | Returns the circuits within the given season. |
@@ -59,51 +30,3 @@ NodeJS, Express, Render - https://comp-4513-f1-api-assignment-1.onrender.com
 | [/api/qualifying/raceId] | Returns the qualifying results for a specified race. |
 | [/api/standings/drivers/raceId] | Returns the current season driver standings table for the specified raceId. |
 | [/api/standings/constructors/raceId] | Returns the current season constructors standings table for the specified raceId.|
-
-## Project Files:
-
-| File | Description |
-|---|---|
-| f1-server.js | The F1 data server/API, which listens for requests. |
-| f1-router.js (in scripts folder) | Handles the routes and returns the appropriate data in JSON.|
-
-## Test Links:
-https://comp-4513-f1-api-assignment-1.onrender.com/api/circuits <br>
-https://comp-4513-f1-api-assignment-1.onrender.com/api/circuits/monza <br>
-https://comp-4513-f1-api-assignment-1.onrender.com/api/circuits/calgary <br>
-<br>
-https://comp-4513-f1-api-assignment-1.onrender.com/api/constructors <br>
-https://comp-4513-f1-api-assignment-1.onrender.com/api/constructors/ferrari <br>
-<br>
-https://comp-4513-f1-api-assignment-1.onrender.com/api/drivers<br>
-Note: Made the driverRef (the following test link), Case **Insensitive**. <br>
-https://comp-4513-f1-api-assignment-1.onrender.com/api/drivers/Norris <br>
-https://comp-4513-f1-api-assignment-1.onrender.com/api/drivers/norris <br>
-https://comp-4513-f1-api-assignment-1.onrender.com/api/drivers/connolly <br>
-https://comp-4513-f1-api-assignment-1.onrender.com/api/drivers/search/sch <br>
-https://comp-4513-f1-api-assignment-1.onrender.com/api/drivers/search/xxxxx <br>
-https://comp-4513-f1-api-assignment-1.onrender.com/api/drivers/race/1069 <br>
-<br>
-https://comp-4513-f1-api-assignment-1.onrender.com/api/races/1034 <br>
-https://comp-4513-f1-api-assignment-1.onrender.com/api/races/season/2021 <br>
-https://comp-4513-f1-api-assignment-1.onrender.com/api/races/season/1800 <br>
-https://comp-4513-f1-api-assignment-1.onrender.com/api/races/season/2020/5 <br>
-https://comp-4513-f1-api-assignment-1.onrender.com/api/races/season/2020/100 <br>
-https://comp-4513-f1-api-assignment-1.onrender.com/api/races/circuits/7 <br>
-Note: the original test links given (previous one included) had a circuitRef that was a number. However, circuitRef is a string, so I created new test cases. <br>
-https://comp-4513-f1-api-assignment-1.onrender.com/api/races/circuits/monza <br>
-https://comp-4513-f1-api-assignment-1.onrender.com/api/races/circuits/monza/season/2015/2022 <br>
-https://comp-4513-f1-api-assignment-1.onrender.com/api/races/circuits/monza/season/2022/2022 <br>
-<br>
-
-https://comp-4513-f1-api-assignment-1.onrender.com/api/results/1106 <br>
-https://comp-4513-f1-api-assignment-1.onrender.com/api/results/driver/max_verstappen <br>
-https://comp-4513-f1-api-assignment-1.onrender.com/api/results/driver/connolly <br>
-https://comp-4513-f1-api-assignment-1.onrender.com/api/results/drivers/sainz/seasons/2021/2022 <br>
-https://comp-4513-f1-api-assignment-1.onrender.com/api/results/drivers/sainz/seasons/2035/2022 <br>
-<br>
-https://comp-4513-f1-api-assignment-1.onrender.com/api/qualifying/1106 <br>
-<br>
-https://comp-4513-f1-api-assignment-1.onrender.com/api/standings/drivers/1120 <br>
-https://comp-4513-f1-api-assignment-1.onrender.com/api/standings/constructors/1120 <br>
-https://comp-4513-f1-api-assignment-1.onrender.com/api/standings/constructors/asds 
