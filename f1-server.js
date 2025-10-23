@@ -214,13 +214,29 @@ app.get("/api/races/circuits/:ref/season/:start/:end", async (req, res) => {
 });
 
 //results api
-app.get("/api/races/:raceId", async (req, res) => {
+app.get("/api/results/:raceId", async (req, res) => {
   const { raceId } = req.params;
   const { data, error } = await supabase
-    .from("races")
-    .select("*, circuits!inner(name, location, country)")
+    .from("results")
+    .select(`grid, position, time, points,
+      drivers!inner(driverRef, code, forename, surname),
+      races!inner(name, round, year, date),
+      constructors!inner(name, constructorRef, nationality)
+    `)
     .eq("raceId", raceId)
-    .single();
+    .order("grid", { ascending: true });
+  if (error) {
+    res.json({ error: 'Data not found' });
+  };
+  res.json(data);
+});
+
+app.get("/api/results/drivers/:ref", async (req, res) => {
+  const { ref } = req.params;
+  const { data, error } = await supabase
+    .from("results")
+    .select("*, drivers!inner (driverRef, forename, surname)")
+    .eq("drivers.driverRef", ref);
 
   if (error) {
     res.json({ error: 'Data not found' });
@@ -229,35 +245,20 @@ app.get("/api/races/:raceId", async (req, res) => {
   res.json(data);
 });
 
-app.get("/api/races/season/:year", async (req, res) => {
-  const { year } = req.params;
+app.get("/api/results/drivers/:ref/seasons/:start/:end", async (req, res) => {
+  const { ref, start, end } = req.params;
   const { data, error } = await supabase
-    .from("races")
-    .select("*")
-    .eq("year", year)
-    .order("round", { ascending: true });
+    .from("results")
+    .select("*, drivers!inner (driverRef, forename, surname), races!inner(year)")
+    .eq("drivers.driverRef", ref)
+    .gte("races.year", start)
+    .lte("races.year", end);
 
-  if (error) {
+    if (error) {
+    res.json({ error: 'Data not found' });
+  } else if (start > end) {
     res.json({ error: 'Data not found' });
   };
-
-  res.json(data);
-});
-
-app.get("/api/races/season/:year/:round", async (req, res) => {
-  const { year, round } = req.params;
-  const { data, error } = await supabase
-    .from("races")
-    .select("*")
-    .eq("year", year)
-    .eq("round", round)
-    .single();
-
-  if (error) {
-    res.json({ error: 'Data not found' });
-  };
-
-  res.json(data);
 });
 
 //qualifying api
