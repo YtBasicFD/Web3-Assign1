@@ -9,7 +9,8 @@ This repository contains code for F1 API. The assignment was to create multiple 
 - Render.com
 
 ## API Endpoints:
-
+| Route | Description |
+|---|---|
 | [/api/circuits] | Returns all the circuits. |
 | [/api/circuits/ref] | Returns a specified circuit. |
 | [/api/circuits/season/year] | Returns the circuits within the given season. |
