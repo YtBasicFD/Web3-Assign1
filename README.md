@@ -35,31 +35,31 @@ This repository contains code for F1 API. The assignment was to create multiple 
 ### API links
 
 ##### Circuits
-https://web3-assign1-1.onrender.com/api/circuits
-https://web3-assign1-1.onrender.com/api/circuits/monza
-https://web3-assign1-1.onrender.com/api/circuits/season/2020
+https://web3-assign1-1.onrender.com/api/circuits <br>
+https://web3-assign1-1.onrender.com/api/circuits/monza <br>
+https://web3-assign1-1.onrender.com/api/circuits/season/2020 <br>
 ##### Constructors
-https://web3-assign1-1.onrender.com/api/constructors
-https://web3-assign1-1.onrender.com/api/constructors/red_bull
+https://web3-assign1-1.onrender.com/api/constructors <br>
+https://web3-assign1-1.onrender.com/api/constructors/red_bull <br>
 ##### Drivers
-https://web3-assign1-1.onrender.com/api/drivers
-https://web3-assign1-1.onrender.com/api/drivers/tsunoda
-https://web3-assign1-1.onrender.com/api/drivers/search/ha
-https://web3-assign1-1.onrender.com/api/drivers/44
+https://web3-assign1-1.onrender.com/api/drivers <br>
+https://web3-assign1-1.onrender.com/api/drivers/tsunoda <br>
+https://web3-assign1-1.onrender.com/api/drivers/search/ha <br>
+https://web3-assign1-1.onrender.com/api/drivers/44 <br>
 #### Races
-https://web3-assign1-1.onrender.com/api/races/45
-https://web3-assign1-1.onrender.com/api/races/season/2020
-https://web3-assign1-1.onrender.com/api/races/season/2021/5
-https://web3-assign1-1.onrender.com/api/races/monza
-https://web3-assign1-1.onrender.com/api/races/monza/season/2017/2019
+https://web3-assign1-1.onrender.com/api/races/45 <br>
+https://web3-assign1-1.onrender.com/api/races/season/2020 <br>
+https://web3-assign1-1.onrender.com/api/races/season/2021/5 <br>
+https://web3-assign1-1.onrender.com/api/races/monza <br>
+https://web3-assign1-1.onrender.com/api/races/monza/season/2017/2019 <br>
 #### Results
-https://web3-assign1-1.onrender.com/api/results/17
-https://web3-assign1-1.onrender.com/api/results/drivers/hamilton
+https://web3-assign1-1.onrender.com/api/results/17 <br>
+https://web3-assign1-1.onrender.com/api/results/drivers/hamilton <br>
 
-(Issue with supabase database)
-https://web3-assign1-1.onrender.com/api/results/hamilton/season/2017/2019
+(Issue with supabase database) <br>
+https://web3-assign1-1.onrender.com/api/results/hamilton/season/2017/2019 <br>
 #### Qualifying
-https://web3-assign1-1.onrender.com/api/qualifying/27
+https://web3-assign1-1.onrender.com/api/qualifying/27 <br>
 #### Standings
-https://web3-assign1-1.onrender.com/api/standings/drivers/6
-https://web3-assign1-1.onrender.com/api/standings/constructors/13
+https://web3-assign1-1.onrender.com/api/standings/drivers/6 <br>
+https://web3-assign1-1.onrender.com/api/standings/constructors/13 <br>
